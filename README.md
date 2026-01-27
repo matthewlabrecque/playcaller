@@ -1,1 +1,14 @@
-# playcaller
+# Playcaller - A frontend for Ansible
+
+A graphical frontend for Ansible written in Python to allow anyone to create ansible playbooks for automating configuration of their Linux/MacOS desktop systems, in order to allow anyone to have a disposable desktop.
+
+## What is a disposable desktop?
+I got the original idea from Nathan Landry (who has an awesome video on this! You should check it out [here](https://www.youtube.com/watch?v=Im3b6dhnp04)). According to Nathan, the two core ideas of disposable environments are data does not live on the computer but is kept somewhere else (whether that be the cloud, a backup hard drive, or a NAS), and that you should be able to quickly get a "fresh installation" of whatever operating system you use configured to your liking. Now, the reality is though that we all have our own little niche preferences, right? So what works for me won't necessarily work for my roommate, etc.
+
+## So what do we do?
+Well, we have several options. The first of these is to create a BASH script to automate it for us, but this process is not only time consuming it makes it incredibly easy for installations to break, and oftentimes leads to incredibly messy code that makes it impossible to easily debug it (just take a look at the Omarchy source code sometime if you want to see me prove my point).
+
+This is where Ansible comes in. Ansible was originally created to allow IT workers to quickly set up new servers at large corporations (this is where we got the idea of "infrastructure as code" from), but since it was released as a open source product any of us could use it for our own Linux systems. The problem? Writing a "playbook" for Ansible (which is how it knows what to do) is tedious, confusing, and time consuming. Trust me, I've done it before. However, I wanted to push Nathan's idea of disposable systems to the maximum, which led me to create Playcaller.
+
+## What is Playcaller?
+Just like in American Football where the playcaller will determine what needs to be done from the playbook in order to win the game, Playcaller (the program) figures out what needs to be added to your Ansible playbook to enable you to configure your own Linux system. And it makes creating an Ansible playbook as simple as clicking checkboxes and searching for programs/packages you want to have installed by default on your system. Once you make all of your selections and click "Generate playcall" it will create the Ansible playbook and any additional files it needs, as well as a script to automatically kickstart the process making it a true "one click install". It can even import your existing configuration files from BASH, ZSH, Neovim, etc. and allow easy deployment of them to a new system!
