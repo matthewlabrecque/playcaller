@@ -2,22 +2,9 @@
 
 from datetime import datetime
 import os
-import shutil
 
 OUTPUT_FILENAME = "autorun.sh"
 
-def detect_package_manager():
-    """Checks for which package manager."""
-    if shutil.which("apt-get"):
-        return "apt"
-    elif shutil.which("dnf"):
-        return "dnf"
-    elif shutil.which("pacman"):
-        return "pacman"
-    elif shutil.which("brew"):
-        return "brew"
-    else:
-        return None
 
 def generate_script(pm):
     """Configures a bash script to kickstart the auto configuration."""
@@ -30,7 +17,7 @@ def generate_script(pm):
             install_cmd = "sudo pacman -Sy && sudo pacman -S --noconfirm --needed"
         case "brew":
             install_cmd = "brew install"
-        
+
     package_list = ["git", "ansible", "stow"]
     package_list_str = "\\\n    ".join(package_list)
 
@@ -54,19 +41,23 @@ reboot now
 
     with open(OUTPUT_FILENAME, "w") as f:
         f.write(script_content)
-    
+
     os.chmod(OUTPUT_FILENAME, 0o755)
     return 0
 
 
 def main():
     """Mainline function to generate the executable file"""
-    pm = detect_package_manager()
+
+    # TODO: Package manager should get value from the calling script, not 'auto-detect it'
+    pm = None
 
     if not pm:
-        raise ValueError('Package manager not detected or not supported')
-    
+        raise ValueError("Package manager not detected or not supported")
+
     generate_script(pm)
+
 
 if __name__ == "__main__":
     main()
+
