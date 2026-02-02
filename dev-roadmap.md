@@ -11,6 +11,7 @@ The goal is to have a working beta by the time of the University of New Hampshir
 
 ## Objectives for Playcaller to be declared an Alpha build
 - Basic functionality must be met
+- Host a server from repology which everyday pulls the current package list for the managers and returns an API
 - Ability to create Ansible playbook without custom configuration
 
 ## Objectives for Playcaller to be declared a Beta build

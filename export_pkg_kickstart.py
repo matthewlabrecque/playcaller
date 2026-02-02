@@ -1,5 +1,10 @@
 ### Generates the bash script that is used to kickstart the program
 
+"""
+This file generates the BASH script that is used on the target PC. Given the package manager that is being used,
+the script will update the system, download Git, Ansible, and GNU Stow and start the Ansible playbook generated.
+"""
+
 from datetime import datetime
 import os
 
@@ -17,6 +22,8 @@ def generate_script(pm):
             install_cmd = "sudo pacman -Sy && sudo pacman -S --noconfirm --needed"
         case "brew":
             install_cmd = "brew install"
+        case _:
+            raise ValueError("Package manager isn't supported")
 
     package_list = ["git", "ansible", "stow"]
     package_list_str = "\\\n    ".join(package_list)
@@ -49,15 +56,14 @@ reboot now
 def main():
     """Mainline function to generate the executable file"""
 
-    # TODO: Package manager should get value from the calling script, not 'auto-detect it'
     pm = None
 
-    if not pm:
-        raise ValueError("Package manager not detected or not supported")
-
-    generate_script(pm)
+    # TODO: if I have a package manager that isn't supported i should print the error
+    try:
+        generate_script(pm)
+    except:
+        print("Package manager not detected or supported")
 
 
 if __name__ == "__main__":
     main()
-

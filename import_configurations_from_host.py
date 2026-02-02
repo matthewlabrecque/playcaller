@@ -1,5 +1,3 @@
-# Support for BASH, ZSH, VIM, NEOVIM, and automation scripts using GNU STOW
-
 import os
 from pathlib import Path
 
@@ -48,4 +46,3 @@ def main(config_type: str = "bash"):
 
 if __name__ == "__main__":
     main()
-
